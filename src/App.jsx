@@ -6,6 +6,9 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import GuideModels from "./components/GuideModels";
 import AddGuideInfo from "./components/AddGuideInfo";
+import MarrakeshDestPage from "./components/pages/MarrakeshDestPage";
+import FesDestPage from "./components/pages/FesDestPage";
+
 
 /*
 import Footer from "./components/Footer";
@@ -57,6 +60,8 @@ export default function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/GuideModels" element={<GuideModels />} />
       <Route path="/add-guide-info" element={<AddGuideInfo />} />
+      <Route path="/destination/1" element={<MarrakeshDestPage />} />
+      <Route path="/destination/2" element={<FesDestPage />} />
 
 
 

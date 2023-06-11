@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Destination1 from "../assets/Marrakech.jpg";
+import { Route, Navigate, Routes } from "react-router-dom";
+
 import Destination2 from "../assets/Destination2.png";
 import Destination3 from "../assets/Destination3.png";
 import Destination4 from "../assets/Destination4.png";
@@ -10,54 +11,83 @@ import info1 from "../assets/info1.png";
 import info2 from "../assets/info2.png";
 import info3 from "../assets/info3.png";
 
+
 export default function Recommend() {
   const data = [
     {
-      image: Destination1,
+      id: 1,
+      image: "https://www.nomadicchica.com/en/productive/wp-content/uploads/2020/02/Marrakesh-best-things-to-do-Morocco-Woman-Gloria-Apara-Nomadicchica.com-7.jpg",
       title: "Marrakesh",
       subTitle: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate asperiores eaque.",
       duration: "Approx 2 night trip",
+    
     },
     {
+      id: 2,
       image: Destination2,
       title: "Fes",
       subTitle: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate asperiores eaque.",
       duration: "Approx 2 night trip",
+     
     },
     {
+      id: 3,
       image: Destination3,
       title: "Tanger",
       subTitle: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate asperiores eaque.",
       duration: "Approx 2 night trip",
+      
     },
     {
+      id: 4,
       image: Destination4,
       title: "Rabat",
       subTitle: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate asperiores eaque.",
       duration: "Approx 1 night trip",
+      
     },
     {
+      id: 5,
       image: Destination5,
       title: "Essaouira",
       subTitle: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate asperiores eaque.",
       duration: "Approx 2 night 2 day trip",
+    
     },
     {
+      id: 6,
       image: Destination6,
       title: "Marzouga",
       subTitle: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate asperiores eaque.",
       duration: "Approx 3 night 2 day trip",
+      
     },
   ];
+  const openDestinationPage = (destination) => {
+    setSelectedDestination(destination);
+  };
+  const closeDestinationPage = () => {
+    setSelectedDestination(null);
+  };
 
   const packages = [
-    "The Weekend Break",
+    "Top Destinations",
     "The Package Holiday",
     "The Group Tour",
     "Long Term Slow Travel",
   ];
 
   const [active, setActive] = useState(1);
+ /* const [selectedDestination, setSelectedDestination] = useState(null);
+  const handleCardClick = (destination) => {
+    setSelectedDestination(destination);
+    };
+    const closePopup = () => {
+      setSelectedDestination(null);
+    }; */
+  const [selectedDestination, setSelectedDestination] = useState(null);
+
+ 
   return (
     <Section id="recommend">
       <div className="title">
@@ -78,9 +108,13 @@ export default function Recommend() {
         </ul>
       </div>
       <div className="destinations">
-        {data.map((destination) => {
+        {data.map((destination, index) => {
           return (
-            <div className="destination">
+            <div
+            className="destination"
+            key={index}
+            onClick={() => openDestinationPage(destination)}
+          >
               <img src={destination.image} alt="" />
               <h3>{destination.title}</h3>
               <p>{destination.subTitle}</p>
@@ -96,10 +130,20 @@ export default function Recommend() {
                 <span>More than 20 guides</span>
                 <span>{destination.duration}</span>
               </div>
+              
+
             </div>
           );
         })}
       </div>
+      {selectedDestination && (
+        <Navigate to={`/destination/${selectedDestination.id}`} replace />
+      )}
+      <Routes>
+        <Route
+          path="/destination/:id"
+        />
+      </Routes>
     </Section>
   );
 }
@@ -190,3 +234,38 @@ const Section = styled.section`
     }
   }
 `;
+/*const Popup = styled.div`
+  
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .popup-content {
+    background-color: white;
+    
+
+    img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #336B87;
+      color: white;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+  }
+`
+*/
